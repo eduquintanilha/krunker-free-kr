@@ -1,0 +1,22 @@
+{
+  "name": "krunker-free-kr",
+  "version": "1.0.0",
+  "description": "Once 6h click on FreeKR button on Krunker.io Game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "krunker",
+    "krunker.io",
+    "free",
+    "kr"
+  ],
+  "author": "Eduardo Quintanilha",
+  "license": "ISC",
+  "dependencies": {
+    "chromedriver": "^78.0.1",
+    "geckodriver": "^1.19.1",
+    "selenium-webdriver": "^4.0.0-alpha.5"
+  }
+}
