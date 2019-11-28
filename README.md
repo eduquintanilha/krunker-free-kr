@@ -4,6 +4,16 @@
 
 ### A simple automated [Selenium](https://selenium.dev/) script to claim your FreeKR on [Krunker.io](https://krunker.io) game.
 
+## Using
+- **After set User and Password environment variables, open terminal and execute: **
+```
+    npm i --save
+```
+  **after, execute: **
+```
+    node src/index.js
+```
+
 ## Chromedriver Issues
 ### For Debian based distros, do:
 
