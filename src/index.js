@@ -11,10 +11,8 @@
 
 const {Builder, By, until} = require('selenium-webdriver');
 const Selenium = require('selenium-webdriver/chrome');
-const CFG = require('../config/configs');
+const CFG = require('./config/configs');
 
-const KRUNKER_URL = CFG.KRUNKER_URL;
-const [LOGIN_USER, LOGIN_PASS] = [CFG.KRUNKER_USER, CFG.KRUNKER_PASS];
 
 const DOM_ELEMENTS = {
     BTN_OPEN_LOGIN: 'button lgn',
@@ -61,7 +59,7 @@ async function executeJsOnPage(code, driver) {
 
 
 async function Main(Driver) {
-    await openPage(KRUNKER_URL, Driver);
+    await openPage(CFG.KRUNKER_URL, Driver);
     await sleepTime(3);
 
     //Open the page
@@ -80,7 +78,7 @@ async function Main(Driver) {
         await clickOnElement(loginInput);
         await sleepTime(0.5);
         //Write user on input element
-        await inputTextOnElement(loginInput, LOGIN_USER);
+        await inputTextOnElement(loginInput, CFG.KRUNKER_USER);
         await sleepTime(0.5);
     }else {console.log(`Element ${loginBtn} not found`)} 
 
@@ -91,7 +89,7 @@ async function Main(Driver) {
         await clickOnElement(loginPass);
         await sleepTime(0.5);
         //Write pass on input element
-        await inputTextOnElement(loginPass, LOGIN_PASS);
+        await inputTextOnElement(loginPass, CFG.KRUNKER_PASS);
         await sleepTime(0.5);
     }else {console.log(`Element ${loginPass} not found`)} 
 
@@ -106,7 +104,7 @@ async function Main(Driver) {
     }else {console.log(`Element ${loginSubmit} not found`)} 
     
     
-    await sleepTime(0.5);
+    await sleepTime(1);
 
     let claimImg = await findElementById(DOM_ELEMENTS.BTN_FREE_KR, Driver);
  
@@ -128,21 +126,21 @@ async function Main(Driver) {
 
 
 async function execLoop() {
-    let options = new Selenium.Options();
-    options.addArguments('disable-infobars');
-    options.setUserPreferences({ credential_enable_service: false });
-
-    const  DRIVER = new Builder()
-        .setChromeOptions(options)
-        .forBrowser('chrome')
-        .build();
-    DRIVER.manage().window().maximize();
-
-    if(LOGIN_USER && LOGIN_PASS){
+    if(CFG.KRUNKER_USER && CFG.KRUNKER_PASS){
     //Start loop    
     do {
+        let options = new Selenium.Options();
+        options.addArguments('disable-infobars');
+        options.setUserPreferences({ credential_enable_service: false });
+    
+        const  DRIVER = new Builder()
+            .setChromeOptions(options)
+            .forBrowser('chrome')
+            .build();
+        DRIVER.manage().window().maximize();
+
         await Main(DRIVER);
-        await sleepTime(7200); //every 2 hours
+        await sleepTime(7200); //every 2 hours = 7200 seconds
     } while(1==1);
     } else {
         console.log(`\n\n\tUser and password not found! Set the environment variable before execute.\n`);
